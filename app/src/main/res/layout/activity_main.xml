@@ -9,6 +9,7 @@
         android:id="@+id/author"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/tomasz_wychocki"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,17 +30,17 @@
         app:layout_constraintTop_toBottomOf="@+id/author">
 
         <Button
-            android:id="@+id/allow"
+            android:id="@+id/buttonPlus"
             style="@android:style/Widget.Button.Small"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_margin="26dp"
-            android:layout_width="100dp"
             android:layout_weight="1"
             android:text="@string/plus"
             android:textSize="36sp" />
 
         <Button
-            android:id="@+id/deny"
+            android:id="@+id/buttonMinus"
             style="@android:style/Widget.Button.Small"
             android:layout_height="match_parent"
             android:layout_margin="26dp"
@@ -54,11 +55,9 @@
         android:id="@+id/buttonsCounter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
         android:text="@string/initial_value"
         android:textAlignment="center"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -67,8 +66,22 @@
         android:id="@+id/slider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonsCounter" />
+
+    <TextView
+        android:id="@+id/sliderValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/initial_value"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
