@@ -21,6 +21,9 @@ class MainActivity : AppCompatActivity() {
         val buttonsCounterTextView = findViewById<TextView>(R.id.buttonsCounter)
         val sliderValueTextView = findViewById<TextView>(R.id.sliderValue)
 
+        buttonPlus.setBackgroundResource(R.drawable.road)
+        buttonMinus.setBackgroundResource(R.drawable.road)
+
         buttonPlus.setOnClickListener {
             buttonsCounter++
             buttonsCounterTextView.text = addZeros(buttonsCounter)

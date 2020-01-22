@@ -33,20 +33,22 @@
             android:id="@+id/buttonPlus"
             style="@android:style/Widget.Button.Small"
             android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
             android:layout_margin="26dp"
             android:layout_weight="1"
             android:text="@string/plus"
+            android:textColor="@android:color/white"
             android:textSize="36sp" />
 
         <Button
             android:id="@+id/buttonMinus"
             style="@android:style/Widget.Button.Small"
-            android:layout_height="match_parent"
-            android:layout_margin="26dp"
             android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="26dp"
             android:layout_weight="1"
             android:text="@string/minus"
+            android:textColor="@android:color/white"
             android:textSize="36sp" />
 
     </LinearLayout>
