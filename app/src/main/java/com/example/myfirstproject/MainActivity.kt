@@ -21,17 +21,27 @@ class MainActivity : AppCompatActivity() {
         val buttonsCounterTextView = findViewById<TextView>(R.id.buttonsCounter)
         val sliderValueTextView = findViewById<TextView>(R.id.sliderValue)
 
-        buttonPlus.setBackgroundResource(R.drawable.road)
-        buttonMinus.setBackgroundResource(R.drawable.road)
+        val buttonImages = arrayOf(
+            R.drawable.alcedo,
+            R.drawable.dog,
+            R.drawable.hedgehog,
+            R.drawable.mammals,
+            R.drawable.rabbit
+        )
+
+        setButtonImage(buttonsCounter, buttonImages, buttonPlus)
+        setButtonImage(buttonsCounter, buttonImages, buttonMinus)
 
         buttonPlus.setOnClickListener {
             buttonsCounter++
             buttonsCounterTextView.text = addZeros(buttonsCounter)
+            setButtonImage(buttonsCounter, buttonImages, buttonPlus)
         }
 
         buttonMinus.setOnClickListener {
             buttonsCounter--
             buttonsCounterTextView.text = addZeros(buttonsCounter)
+            setButtonImage(buttonsCounter, buttonImages, buttonMinus)
         }
 
         slider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -54,5 +64,15 @@ class MainActivity : AppCompatActivity() {
             val positiveNumber = number * -1
             "-" + positiveNumber.toString().padStart(3, '0')
         }
+    }
+
+    fun setButtonImage (imageIndex : Int, imagesArray : Array<Int>, button : Button) {
+        var newIndex = imageIndex % imagesArray.size
+
+        if (newIndex < 0) {
+            newIndex *= -1
+        }
+
+        button.setBackgroundResource(imagesArray[newIndex])
     }
 }
