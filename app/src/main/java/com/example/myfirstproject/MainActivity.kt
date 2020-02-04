@@ -1,10 +1,23 @@
 package com.example.myfirstproject
 
-import androidx.appcompat.app.AppCompatActivity
+import android.R.attr
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.widget.Button
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.InputStream
+import java.lang.Math.abs
+import java.net.HttpURLConnection
+import java.net.URL
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,9 +52,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonMinus.setOnClickListener {
-            buttonsCounter--
-            buttonsCounterTextView.text = addZeros(buttonsCounter)
-            setButtonImage(buttonsCounter, buttonImages, buttonMinus)
+            lifecycleScope.launch {
+                val bitmap = httpGet("https://picsum.photos/id/" + kotlin.math.abs(buttonsCounter) +"/400/200.jpg")
+                buttonMinus.background = BitmapDrawable(resources, bitmap)
+
+                buttonsCounter--
+                buttonsCounterTextView.text = addZeros(buttonsCounter)
+            }
         }
 
         slider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -74,5 +91,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         button.setBackgroundResource(imagesArray[newIndex])
+    }
+
+    private suspend fun httpGet(myURL: String): Bitmap {
+        return withContext(Dispatchers.IO) {
+            val inputStream : InputStream
+            val url = URL(myURL)
+            val conn : HttpURLConnection = url.openConnection() as HttpURLConnection
+
+            conn.connect()
+            inputStream = conn.inputStream
+            BitmapFactory.decodeStream(inputStream)
+        }
     }
 }
