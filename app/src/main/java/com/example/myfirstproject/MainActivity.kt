@@ -127,5 +127,6 @@ class MainActivity : AppCompatActivity() {
     private fun loadValue() : Int {
         val sharedPreference = getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
         return sharedPreference.getInt("myNum", 0)
+		// XD
     }
 }
