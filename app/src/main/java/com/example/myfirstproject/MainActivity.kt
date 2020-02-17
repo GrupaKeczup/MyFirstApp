@@ -1,10 +1,12 @@
 package com.example.myfirstproject
 
 import android.R.attr
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.widget.Button
 import android.widget.SeekBar
 import android.widget.TextView
@@ -45,6 +47,9 @@ class MainActivity : AppCompatActivity() {
         setButtonImage(buttonsCounter, buttonImages, buttonPlus)
         setButtonImage(buttonsCounter, buttonImages, buttonMinus)
 
+        slider.progress = loadValue()
+        sliderValueTextView.text = addZeros(slider.progress)
+
         buttonPlus.setOnClickListener {
             buttonsCounter++
             buttonsCounterTextView.text = addZeros(buttonsCounter)
@@ -74,6 +79,12 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    override fun onStop() {
+        val slider = findViewById<SeekBar>(R.id.slider)
+        saveValue(slider.progress)
+        super.onStop()
+    }
+
     fun addZeros (number : Int) : String {
         return if (number >= 0) {
             number.toString().padStart(3, '0')
@@ -83,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setButtonImage (imageIndex : Int, imagesArray : Array<Int>, button : Button) {
+    private fun setButtonImage (imageIndex : Int, imagesArray : Array<Int>, button : Button) {
         var newIndex = imageIndex % imagesArray.size
 
         if (newIndex < 0) {
@@ -103,5 +114,18 @@ class MainActivity : AppCompatActivity() {
             inputStream = conn.inputStream
             BitmapFactory.decodeStream(inputStream)
         }
+    }
+
+    private fun saveValue(number : Int) {
+        val sharedPreference = getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
+        val editor = sharedPreference.edit()
+
+        editor.putInt("myNum", number)
+        editor.apply()
+    }
+
+    private fun loadValue() : Int {
+        val sharedPreference = getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
+        return sharedPreference.getInt("myNum", 0)
     }
 }
